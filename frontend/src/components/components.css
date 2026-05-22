@@ -88,7 +88,12 @@
   .badge-text {
     text-transform: uppercase;
   }
-  
+  .title-base{
+    font-size: 1.1rem;
+    color: white;
+    background-color: var(--bg-surface);
+    border-radius: 6px;
+  }
   /* Contenedor principal del menú */
 .menu-container {
     padding: 20px;
@@ -107,11 +112,15 @@
   
   /* Cuadrícula para mostrar los botones en 2 columnas (o 1 si el espacio es reducido) */
   .menu-grid {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
   }
-  
+  .menu {
+    overflow-y: auto;
+    max-height: 89%;
+    padding-right: 10px;
+  }
+
   /* Estilo moderno para los botones de ingredientes */
   .menu-button {
     display: flex;
@@ -161,5 +170,69 @@
     font-size: 0.85rem;
     font-weight: normal;
     opacity: 0.85;
+  }
+  
+  /* Contenedor del encabezado del acordeón */
+.collapsible-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 10px 0;
+    font-weight: bold;
+    border-bottom: 1px solid var(--border-color);
+    user-select: none; 
+    color: white;/* Evita que el texto se sombree azul al hacer doble clic rápido */
+  }
+
+  .collapsible-section {
+    background-color: var(--bg-surface);
+    border-radius: 6px;
+    padding: 2%;
+  }
+
+  /* Columna de ingredientes con Scroll autogenerado */
+  .base-subtitle {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 8px;
+  }
+  
+  /* Icono de la flecha con rotación animada */
+  .toggle-icon {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+  }
+  
+  .toggle-icon.open {
+    transform: rotate(180deg); /* Gira la flecha hacia arriba cuando está abierto */
+  }
+  
+  /* Lógica de animación para el contenido */
+  .collapsible-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.2s ease;
+  }
+  
+  /* Cuando está expandido, se le da un valor de max-height lo suficientemente grande */
+  .collapsible-content.expanded {
+    max-height: 450px; /* Ajusta según el tamaño estimado de tu grid */
+    opacity: 1;
+  }
+  
+  /* Cuando está colapsado, se esconde por completo */
+  .collapsible-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none; /* Evita que se puedan clickear los botones ocultos */
+  }
+  
+  /* Tu grid existente se mantiene igual */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
   

@@ -27,7 +27,10 @@ function App() {
       <div className="app-container">
         <h1 className="title">Gourmet Burger Builder</h1>
         <div className="order-actions">
-          <button className="btn-order" disabled={isOrdering} onClick={() => saveOrder()}>
+          <button className="btn-order"
+            disabled={isOrdering || burgerIngredients.length == 0}
+            onClick={() => saveOrder()}
+          >
             <span className="btn-text-main">Place Order!</span>
             <span className="btn-text-sub">
               Your customed burger is one click of distance.
@@ -41,7 +44,7 @@ function App() {
           <div className="column">
             <BurgerPreview burgerBase={burgerBase} ingredients={burgerIngredients} />
           </div>
-          <div className="column scrollable">
+          <div className="column">
             <OrderSummary burgerBase={burgerBase} ingredients={burgerIngredients} />
           </div>
         </div>
