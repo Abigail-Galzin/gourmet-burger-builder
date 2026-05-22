@@ -1,0 +1,4 @@
+.app-burger{
+  display: flex;
+  flex: flex-col;
+}
