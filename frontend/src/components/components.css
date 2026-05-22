@@ -1,0 +1,165 @@
+.burger-ingredient-layer {
+    display: flex;
+    justify-content: center;  /* Centra el texto horizontalmente */
+    align-items: center;      /* Centra el texto verticalmente */
+    width: 80%;               /* Cambiado de 20% a 80% (o 200px) para que sea visible */
+    height: 25px;
+    margin: 2px auto;         /* Centra la capa del ingrediente y da separación */
+    border-radius: 5px;
+    font-size: 12px;
+    color: white;             /* Color de texto para que contraste */
+    font-weight: bold;
+}
+
+/* Contenedor principal del resumen con su propio fondo */
+.summary-container {
+    background-color: var(--bg-surface);
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra suave opcional */
+    border-bottom: 2px solid var(--border-color);
+  }
+  
+  .summary-title {
+    margin-top: 0;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+    font-size: 1.5rem;
+  }
+  
+  /* Lista de ingredientes en formato columna */
+  .summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1; /* Empuja el total y el badge hacia abajo */
+    overflow-y: auto; /* Por si la lista de precios se hace muy larga */
+  }
+  
+  /* Fila de cada ingrediente (Nombre a la izquierda, precio a la derecha) */
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+  }
+  
+  .ingredient-name {
+    font-weight: 500;
+  }
+  
+  .ingredient-price {
+    color: var(--text-muted);
+  }
+  
+  /* Sección del precio total */
+  .summary-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .total-amount {
+    color: var(--success-color);
+  }
+  
+  /* Estilo para el Badge/Etiqueta inferior */
+  .summary-badge {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .badge-text {
+    text-transform: uppercase;
+  }
+  
+  /* Contenedor principal del menú */
+.menu-container {
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+  }
+  
+  /* Cuadrícula para mostrar los botones en 2 columnas (o 1 si el espacio es reducido) */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  
+  /* Estilo moderno para los botones de ingredientes */
+  .menu-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 10px;
+    background-color: var(--bg-app);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* Efecto Hover (cuando el usuario pasa el mouse por encima) */
+  .menu-button:hover:not(:disabled) {
+    background-color: var(--primary-color);
+    color: var(--bg-app);
+    transform: translateY(-2px); /* Pequeño salto hacia arriba */
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
+  }
+  
+  /* Efecto Click (Active) */
+  .menu-button:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  /* Estado deshabilitado cuando se está procesando la orden */
+  .menu-button:disabled {
+    border-color: #cccccc;
+    color: #aaaaaa;
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+  }
+  
+  /* Texto del nombre del ingrediente */
+  .ingredient-btn-name {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    text-transform: capitalize;
+  }
+  
+  /* Texto del precio dentro del botón */
+  .ingredient-btn-price {
+    font-size: 0.85rem;
+    font-weight: normal;
+    opacity: 0.85;
+  }
+  

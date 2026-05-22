@@ -1,10 +1,11 @@
 import type { Ingredients } from '../Types';
+import './components.css'
 
 export default function OrderSummary({ burgerBase, ingredients }) {
     const [basePrice, baseCalories] = burgerBase ? [burgerBase.price, burgerBase.calories] : [0, 0];
-    const totalPrice = ingredients.reduce((sum, ing) => sum + ing.price, basePrice);
+    const totalPrice = ingredients.reduce((sum: number, ing: Ingredients) => sum + ing.price, basePrice);
     const ingredientsToMap: Ingredients[] = [...ingredients];
-    const totalCalories = ingredients.reduce((sum, ing) => sum + ing.calories, baseCalories);
+    const totalCalories = ingredients.reduce((sum: number, ing: Ingredients) => sum + ing.calories, baseCalories);
 
     const getChefBadge = (ingredients: Ingredients[], totalCalories: number) => {
         const hasMeat = ingredients.some((ing) => ing.type === 'meat');
@@ -42,20 +43,26 @@ export default function OrderSummary({ burgerBase, ingredients }) {
     const badge = getChefBadge(ingredients, totalCalories);
 
     return (
-        <div>
-            <div>
+        <div className="summary-container">
+            <h2 className="summary-title">Summary</h2>
+            <div className="summary-badge" style={{ backgroundColor: badge.bg, color: badge.color }}>
+                Type: <strong className="badge-text">{badge.text}</strong>
+            </div>
+            <div className="summary-list">
                 {ingredientsToMap.map((ingredient: Ingredients, index: number) => {
                     return (
-                        <div>
-                            ({index}.- ) {ingredient.name} (${ingredient.price})
+                        <div key={ingredient.name + index} className="summary-item">
+                            <span className="ingredient-name">
+                                {index + 1}. {ingredient.name}
+                            </span>
+                            <span className="ingredient-price">
+                                (${ingredient.price})
+                            </span>
                         </div>
                     );
                 })}
             </div>
-            <div> TOTAL PRICE: {totalPrice}</div>
-            <div style={{ border: '5px', backgroundColor: badge.bg }}>
-                Type <p style={{ border: '5px', color: badge.color }}>{badge.text}</p>
-            </div>
+            <div className="summary-total"> Total Price: ${totalPrice}</div>
         </div>
     );
 }
