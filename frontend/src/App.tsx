@@ -39,10 +39,19 @@ function App() {
         </div>
         <div className="app-burger">
           <div className="column scrollable">
-            <IngredientMenu onAddIngredient={handleAddIngredient} isOrdering={isOrdering} />
+            <IngredientMenu
+              onAddIngredient={handleAddIngredient}
+              isOrdering={isOrdering}
+              burgerBase={burgerBase}
+              burgerIngredients={burgerIngredients}
+            />
           </div>
           <div className="column">
-            <BurgerPreview burgerBase={burgerBase} ingredients={burgerIngredients} />
+            <BurgerPreview
+              burgerBase={burgerBase}
+              ingredients={burgerIngredients}
+              setBurgerIngredients={setBurgerIngredients}
+            />
           </div>
           <div className="column">
             <OrderSummary burgerBase={burgerBase} ingredients={burgerIngredients} />

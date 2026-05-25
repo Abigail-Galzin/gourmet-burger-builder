@@ -1,238 +1,251 @@
 .burger-ingredient-layer {
-    display: flex;
-    justify-content: center;  /* Centra el texto horizontalmente */
-    align-items: center;      /* Centra el texto verticalmente */
-    width: 80%;               /* Cambiado de 20% a 80% (o 200px) para que sea visible */
-    height: 25px;
-    margin: 2px auto;         /* Centra la capa del ingrediente y da separación */
-    border-radius: 5px;
-    font-size: 12px;
-    color: white;             /* Color de texto para que contraste */
-    font-weight: bold;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 25px;
+  margin: 2px auto;
+  border-radius: 5px;
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
 }
 
-/* Contenedor principal del resumen con su propio fondo */
 .summary-container {
-    background-color: var(--bg-surface);
-    border-radius: 8px;
-    padding: 20px;
-    box-sizing: border-box;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra suave opcional */
-    border-bottom: 2px solid var(--border-color);
-  }
-  
-  .summary-title {
-    margin-top: 0;
-    border-bottom: 2px solid #e9ecef;
-    padding-bottom: 10px;
-    font-size: 1.5rem;
-  }
-  
-  /* Lista de ingredientes en formato columna */
-  .summary-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex: 1; /* Empuja el total y el badge hacia abajo */
-    overflow-y: auto; /* Por si la lista de precios se hace muy larga */
-  }
-  
-  /* Fila de cada ingrediente (Nombre a la izquierda, precio a la derecha) */
-  .summary-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1rem;
-  }
-  
-  .ingredient-name {
-    font-weight: 500;
-  }
-  
-  .ingredient-price {
-    color: var(--text-muted);
-  }
-  
-  /* Sección del precio total */
-  .summary-total {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 2px solid #e9ecef;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .total-amount {
-    color: var(--success-color);
-  }
-  
-  /* Estilo para el Badge/Etiqueta inferior */
-  .summary-badge {
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 6px;
-    text-align: center;
-    font-weight: 500;
-    font-size: 0.9rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .badge-text {
-    text-transform: uppercase;
-  }
-  .title-base{
-    font-size: 1.1rem;
-    color: white;
-    background-color: var(--bg-surface);
-    border-radius: 6px;
-  }
-  /* Contenedor principal del menú */
+  background-color: var(--bg-surface);
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.summary-title {
+  margin-top: 0;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.remove-ingredient {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid black;
+  color: brown;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ingredient-name {
+  font-weight: 500;
+}
+
+.ingredient-price {
+  color: var(--text-muted);
+}
+
+.summary-total {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+}
+
+.total-amount {
+  color: var(--success-color);
+}
+
+.summary-badge {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.badge-text {
+  text-transform: uppercase;
+}
+
+.title-base {
+  font-size: 1.1rem;
+  color: white;
+  background-color: var(--bg-surface);
+  border-radius: 6px;
+}
+
 .menu-container {
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .menu-title {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    border-bottom: 2px solid #e9ecef;
-    padding-bottom: 10px;
-  }
-  
-  /* Cuadrícula para mostrar los botones en 2 columnas (o 1 si el espacio es reducido) */
-  .menu-grid {
-    display: flex;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  }
-  .menu {
-    overflow-y: auto;
-    max-height: 89%;
-    padding-right: 10px;
-  }
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
 
-  /* Estilo moderno para los botones de ingredientes */
-  .menu-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 10px;
-    background-color: var(--bg-app);
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  /* Efecto Hover (cuando el usuario pasa el mouse por encima) */
-  .menu-button:hover:not(:disabled) {
-    background-color: var(--primary-color);
-    color: var(--bg-app);
-    transform: translateY(-2px); /* Pequeño salto hacia arriba */
-    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
-  }
-  
-  /* Efecto Click (Active) */
-  .menu-button:active:not(:disabled) {
-    transform: translateY(0);
-  }
-  
-  /* Estado deshabilitado cuando se está procesando la orden */
-  .menu-button:disabled {
-    border-color: #cccccc;
-    color: #aaaaaa;
-    background-color: #f5f5f5;
-    cursor: not-allowed;
-  }
-  
-  /* Texto del nombre del ingrediente */
-  .ingredient-btn-name {
-    font-size: 1rem;
-    margin-bottom: 4px;
-    text-transform: capitalize;
-  }
-  
-  /* Texto del precio dentro del botón */
-  .ingredient-btn-price {
-    font-size: 0.85rem;
-    font-weight: normal;
-    opacity: 0.85;
-  }
-  
-  /* Contenedor del encabezado del acordeón */
+.menu-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 10px;
+}
+
+.menu-grid {
+  display: flex;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.menu {
+  overflow-y: auto;
+  max-height: 89%;
+  padding-right: 10px;
+}
+
+.menu-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+  background-color: var(--bg-app);
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-button:hover:not(:disabled),
+.menu-button.selected {
+  background-color: var(--primary-color);
+  color: var(--bg-app);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
+}
+
+.menu-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.menu-button:disabled {
+  border-color: #cccccc;
+  color: #aaaaaa;
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.ingredient-btn-name {
+  font-size: 1rem;
+  margin-bottom: 4px;
+  text-transform: capitalize;
+}
+
+.ingredient-btn-price {
+  font-size: 0.85rem;
+  font-weight: normal;
+  opacity: 0.85;
+}
+
 .collapsible-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    padding: 10px 0;
-    font-weight: bold;
-    border-bottom: 1px solid var(--border-color);
-    user-select: none; 
-    color: white;/* Evita que el texto se sombree azul al hacer doble clic rápido */
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 10px 0;
+  font-weight: bold;
+  border-bottom: 1px solid var(--border-color);
+  user-select: none;
+  color: white;
+}
 
-  .collapsible-section {
-    background-color: var(--bg-surface);
-    border-radius: 6px;
-    padding: 2%;
-  }
+.collapsible-section {
+  background-color: var(--bg-surface);
+  border-radius: 6px;
+  padding: 2%;
+}
 
-  /* Columna de ingredientes con Scroll autogenerado */
-  .base-subtitle {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-    margin-top: 8px;
-  }
-  
-  /* Icono de la flecha con rotación animada */
-  .toggle-icon {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    transition: transform 0.3s ease;
-  }
-  
-  .toggle-icon.open {
-    transform: rotate(180deg); /* Gira la flecha hacia arriba cuando está abierto */
-  }
-  
-  /* Lógica de animación para el contenido */
-  .collapsible-content {
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out, opacity 0.2s ease;
-  }
-  
-  /* Cuando está expandido, se le da un valor de max-height lo suficientemente grande */
-  .collapsible-content.expanded {
-    max-height: 450px; /* Ajusta según el tamaño estimado de tu grid */
-    opacity: 1;
-  }
-  
-  /* Cuando está colapsado, se esconde por completo */
-  .collapsible-content.collapsed {
-    max-height: 0;
-    opacity: 0;
-    pointer-events: none; /* Evita que se puedan clickear los botones ocultos */
-  }
-  
-  /* Tu grid existente se mantiene igual */
-  .menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  }
-  
+.base-subtitle {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.toggle-icon {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+}
+
+.toggle-icon.open {
+  transform: rotate(180deg);
+}
+
+.collapsible-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.2s ease;
+}
+
+.collapsible-content.expanded {
+  max-height: 450px;
+  opacity: 1;
+}
+
+.collapsible-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+
+.text-badge {
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  color: white;
+}

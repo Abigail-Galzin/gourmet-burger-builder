@@ -4,7 +4,7 @@ import './components.css'
 export default function OrderSummary({ burgerBase, ingredients }) {
     const [basePrice, baseCalories] = burgerBase ? [burgerBase.price, burgerBase.calories] : [0, 0];
     const totalPrice = ingredients.reduce((sum: number, ing: Ingredients) => sum + ing.price, basePrice);
-    const ingredientsToMap: Ingredients[] = [...ingredients];
+    const ingredientsToMap: Ingredients[] = burgerBase ? [burgerBase,...ingredients]:[...ingredients];
     const totalCalories = ingredients.reduce((sum: number, ing: Ingredients) => sum + ing.calories, baseCalories);
 
     const getChefBadge = (ingredients: Ingredients[], totalCalories: number) => {
@@ -62,7 +62,7 @@ export default function OrderSummary({ burgerBase, ingredients }) {
                     );
                 })}
             </div>
-            <div className="summary-total"> Total Price: ${totalPrice}</div>
+            <div className="summary-total"> Total Price: ${totalPrice.toFixed(2)}</div>
         </div>
     );
 }

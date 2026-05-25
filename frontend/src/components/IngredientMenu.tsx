@@ -6,10 +6,16 @@ import { supabase } from '../supabaseClient';
 interface IngredientMenuProps {
   onAddIngredient: (ingredient: Ingredients) => void;
   isOrdering: boolean;
+  burgerBase: Ingredients;
+  burgerIngredients: Ingredients[];
 }
 
-export default function IngredientMenu({ onAddIngredient, isOrdering }: IngredientMenuProps) {
-  //const [available_ingredients, setAvailableIngredients] = useState([]);
+export default function IngredientMenu({
+    onAddIngredient,
+    isOrdering,
+    burgerBase,
+    burgerIngredients
+  }: IngredientMenuProps) {
   const [baseIngredients, setBaseIngredients] = useState([]);
   const [normalIngredients, setNormalIngredients] = useState([]);
   const [isBaseOpen, setIsBaseOpen] = useState(true);
@@ -42,17 +48,19 @@ export default function IngredientMenu({ onAddIngredient, isOrdering }: Ingredie
         <span className='base-subtitle'>Select the base for your burger</span>
         <div className='menu'>
           <div className='menu-grid'>
-            {baseIngredients.map((ingredient) => (
+            {baseIngredients.map((ingredient) => {
+            const isBaseSelected = burgerBase?.id === ingredient.id;
+            return (
               <button
                 key={ingredient.id}
-                className='menu-button'
+                className={`menu-button ${isBaseSelected ? 'selected' : ''}`}
                 onClick={() => onAddIngredient(ingredient)}
                 disabled={isOrdering}
               >
-                <span className='ingredient-btn-name'>{ingredient.name}</span>
-                <span className='ingredient-btn-price'>+${ingredient.price}</span>
+                <span className="ingredient-btn-name">{ingredient.name}</span>
+                <span className="ingredient-btn-price">+${ingredient.price}</span>
               </button>
-            ))}
+            )})}
           </div>
         </div>
       </div>
@@ -71,21 +79,23 @@ export default function IngredientMenu({ onAddIngredient, isOrdering }: Ingredie
         <span className='base-subtitle'>Select the ingredients for your burger</span>
         <div className='menu'>
           <div className='menu-grid'>
-            {normalIngredients.map((ingredient) => (
+            {normalIngredients.map((ingredient) => {
+            const isIngredientSelected =
+              burgerIngredients.some(burgerIngredient => burgerIngredient.id === ingredient.id);
+            return (
               <button
                 key={ingredient.id}
-                className='menu-button'
+                className={`menu-button ${isIngredientSelected ? 'selected' : ''}`}
                 onClick={() => onAddIngredient(ingredient)}
                 disabled={isOrdering}
               >
                 <span className='ingredient-btn-name'>{ingredient.name}</span>
                 <span className='ingredient-btn-price'>+${ingredient.price}</span>
               </button>
-            ))}
+            )})}
           </div>
         </div>
       </div>
-
     </div>
   );
 }
