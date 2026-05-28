@@ -1,6 +1,6 @@
 import { useState, useContext, createContext } from 'react';
-import type { Ingredients, OrderInput } from '../Types';
-import { supabase } from '../supabaseClient';
+import { orderService } from '../service/OrderService';
+import type { Ingredients } from '../Types';
 
 const BurgerContext = createContext(null);
 
@@ -40,49 +40,21 @@ export function BurgerProvider({ children }) {
   const saveBurger = async () => {
     try {
       setIsOrdering(false);
-      const orderInput: OrderInput = {
-        total_price: totalPrice,
-        total_calories: totalCalories,
-        status: 'PENDING'
-      }
+      await orderService.createBurgerOrder(
+        totalPrice,
+        totalCalories,
+        burgerBase,
+        burgerIngredients
+      );
 
-      const { data: createdOrder, error } = await supabase
-        .from('orders')
-        .insert([orderInput])
-        .select('id')
-        .single();
+      alert('✅ Burger order stored with layers!');
 
-      if (error || !createdOrder) {
-        alert(`⚠️ Error al crear la orden: ${error?.message || 'Error desconocido'}`);
-        return { success: false, error: error };
-      }
-      const newOrderId = createdOrder.id;
+      setIsOrdering(false);
+      setBurgerIngredients([]);
+      setBurgerBase(null);
 
-      const ingredientsPreview: Ingredients[] = burgerBase
-        ? [burgerBase, ...burgerIngredients]
-        : burgerIngredients;
-      const intermediateRows = ingredientsPreview.map((ingredient, index) => ({
-        order_id: newOrderId,
-        ingredient_id: ingredient.id,
-        layer_position: index,
-        is_base: ingredient.type.includes('base')
-      }));
-
-      const { error: ingredientsError } = await supabase
-        .from('order_ingredients')
-        .insert(intermediateRows);
-
-      if (ingredientsError) {
-        alert(`⚠️ Orden creada (#${newOrderId}), pero falló al guardar los ingredientes: ${ingredientsError.message}`);
-        return;
-      }
-      if (createdOrder != null) {
-        alert('¡✅ Orden creada con éxito!');
-        setBurgerIngredients([]);
-        setBurgerBase(null);
-      }
-    } catch (error) {
-      console.error('Error inesperado:', error);
+    } catch (error: any) {
+      alert(`⚠️ Error: ${error.message}`);
     } finally {
       setIsOrdering(false);
     }

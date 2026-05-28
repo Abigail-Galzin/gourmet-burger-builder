@@ -3,7 +3,7 @@ import IngredientMenu from './components/IngredientMenu';
 import BurgerPreview from './components/BurgerPreview';
 import OrderSummary from './components/OrderSummary';
 import { BurgerProvider } from './context/BurgerContext';
-import BurgerBuilder from './components/StoreOrder';
+import BurgerBuilder from './components/BurgerBuilder';
 
 function App() {
   return (
