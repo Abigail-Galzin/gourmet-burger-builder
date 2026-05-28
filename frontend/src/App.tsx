@@ -1,63 +1,31 @@
-import { useState } from 'react';
 import './App.css';
-import type { Ingredients } from './Types';
 import IngredientMenu from './components/IngredientMenu';
 import BurgerPreview from './components/BurgerPreview';
 import OrderSummary from './components/OrderSummary';
+import { BurgerProvider } from './context/BurgerContext';
+import BurgerBuilder from './components/StoreOrder';
 
 function App() {
-  const [burgerIngredients, setBurgerIngredients] = useState<Ingredients[]>([]);
-  const [burgerBase, setBurgerBase] = useState<Ingredients | null>(null);
-  const [isOrdering, setIsOrdering] = useState<boolean>(false);
-
-  const handleAddIngredient = (ingredient: Ingredients) => {
-    if (ingredient.type.includes('base')) {
-      setBurgerBase(ingredient);
-    } else {
-      setBurgerIngredients([...burgerIngredients, ingredient]);
-    }
-  };
-
-  const saveOrder = () => {
-    setIsOrdering(!isOrdering);
-  };
-
   return (
     <>
-      <div className="app-container">
-        <h1 className="title">Gourmet Burger Builder</h1>
-        <div className="order-actions">
-          <button className="btn-order"
-            disabled={isOrdering || burgerIngredients.length == 0}
-            onClick={() => saveOrder()}
-          >
-            <span className="btn-text-main">Place Order!</span>
-            <span className="btn-text-sub">
-              Your customed burger is one click of distance.
-            </span>
-          </button>
-        </div>
-        <div className="app-burger">
-          <div className="column scrollable">
-            <IngredientMenu
-              onAddIngredient={handleAddIngredient}
-              isOrdering={isOrdering}
-              burgerBase={burgerBase}
-              burgerIngredients={burgerIngredients}
-            />
+      <BurgerProvider>
+        <div className="app-container">
+          <div>
+            <BurgerBuilder/>
           </div>
-          <div className="column">
-            <BurgerPreview
-              burgerBase={burgerBase}
-              ingredients={burgerIngredients}
-              setBurgerIngredients={setBurgerIngredients}
-            />
-          </div>
-          <div className="column">
-            <OrderSummary burgerBase={burgerBase} ingredients={burgerIngredients} />
+          <div className="app-burger">
+            <div className="column scrollable">
+              <IngredientMenu />
+            </div>
+            <div className="column">
+              <BurgerPreview />
+            </div>
+            <div className="column">
+              <OrderSummary />
+            </div>
           </div>
         </div>
-      </div>
+      </BurgerProvider>
     </>
   );
 }

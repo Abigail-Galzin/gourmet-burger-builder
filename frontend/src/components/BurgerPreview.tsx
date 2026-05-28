@@ -1,16 +1,19 @@
-import type { Ingredients } from "../Types"
-import './components.css'
+import type { Ingredients } from "../Types";
+import { useBurgerBuilder } from '../context/BurgerContext';
+import './components.css';
 
-export default function BurgerPreview({burgerBase, ingredients, setBurgerIngredients}){
+export default function BurgerPreview({}){
+    const { setBurgerIngredients, burgerBase, burgerIngredients } = useBurgerBuilder();
     const ingredientsToMap: Ingredients[] = burgerBase
-        ? [burgerBase, ...ingredients, burgerBase]
-        : [...ingredients];
+        ? [burgerBase, ...burgerIngredients, burgerBase]
+        : [...burgerIngredients];
 
     const delteIngredient = (index : number) => {
         setBurgerIngredients(prevIngredients =>
-            prevIngredients.filter((ingredient, ingIndex) => ingIndex !== index)
+            prevIngredients.filter((_, ingIndex) => ingIndex !== index)
         );
     }
+
     return (
         <div className="menu-container">
             <h2 className="summary-title">Burger preview</h2>

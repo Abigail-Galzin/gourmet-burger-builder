@@ -1,25 +1,14 @@
 import { useState, useEffect } from 'react';
-import type { Ingredients } from '../Types';
 import './components.css';
 import { supabase } from '../supabaseClient';
+import { useBurgerBuilder } from '../context/BurgerContext';
 
-interface IngredientMenuProps {
-  onAddIngredient: (ingredient: Ingredients) => void;
-  isOrdering: boolean;
-  burgerBase: Ingredients;
-  burgerIngredients: Ingredients[];
-}
-
-export default function IngredientMenu({
-    onAddIngredient,
-    isOrdering,
-    burgerBase,
-    burgerIngredients
-  }: IngredientMenuProps) {
+export default function IngredientMenu({ }) {
   const [baseIngredients, setBaseIngredients] = useState([]);
   const [normalIngredients, setNormalIngredients] = useState([]);
   const [isBaseOpen, setIsBaseOpen] = useState(true);
   const [isIngredientsOpen, setIsIngredientsOpen] = useState(false);
+  const { isOrdering, addIngredient, burgerBase, burgerIngredients } = useBurgerBuilder();
 
   useEffect(() => {
     async function obtenerDatos() {
@@ -54,7 +43,7 @@ export default function IngredientMenu({
               <button
                 key={ingredient.id}
                 className={`menu-button ${isBaseSelected ? 'selected' : ''}`}
-                onClick={() => onAddIngredient(ingredient)}
+                onClick={() => addIngredient(ingredient)}
                 disabled={isOrdering}
               >
                 <span className="ingredient-btn-name">{ingredient.name}</span>
@@ -86,7 +75,7 @@ export default function IngredientMenu({
               <button
                 key={ingredient.id}
                 className={`menu-button ${isIngredientSelected ? 'selected' : ''}`}
-                onClick={() => onAddIngredient(ingredient)}
+                onClick={() => addIngredient(ingredient)}
                 disabled={isOrdering}
               >
                 <span className='ingredient-btn-name'>{ingredient.name}</span>

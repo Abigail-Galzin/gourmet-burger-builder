@@ -1,11 +1,9 @@
+import { useBurgerBuilder } from '../context/BurgerContext';
 import type { Ingredients } from '../Types';
-import './components.css'
+import './components.css';
 
-export default function OrderSummary({ burgerBase, ingredients }) {
-    const [basePrice, baseCalories] = burgerBase ? [burgerBase.price, burgerBase.calories] : [0, 0];
-    const totalPrice = ingredients.reduce((sum: number, ing: Ingredients) => sum + ing.price, basePrice);
-    const ingredientsToMap: Ingredients[] = burgerBase ? [burgerBase,...ingredients]:[...ingredients];
-    const totalCalories = ingredients.reduce((sum: number, ing: Ingredients) => sum + ing.calories, baseCalories);
+export default function OrderSummary({ }) {
+    const { totalIngredients, totalCalories, totalPrice} = useBurgerBuilder();
 
     const getChefBadge = (ingredients: Ingredients[], totalCalories: number) => {
         const hasMeat = ingredients.some((ing) => ing.type === 'meat');
@@ -40,7 +38,7 @@ export default function OrderSummary({ burgerBase, ingredients }) {
             color: '#856404',
         };
     };
-    const badge = getChefBadge(ingredients, totalCalories);
+    const badge = getChefBadge(totalIngredients, totalCalories);
 
     return (
         <div className="summary-container">
@@ -49,7 +47,7 @@ export default function OrderSummary({ burgerBase, ingredients }) {
                 Type: <strong className="badge-text">{badge.text}</strong>
             </div>
             <div className="summary-list">
-                {ingredientsToMap.map((ingredient: Ingredients, index: number) => {
+                {totalIngredients.map((ingredient: Ingredients, index: number) => {
                     return (
                         <div key={ingredient.name + index} className="summary-item">
                             <span className="ingredient-name">
