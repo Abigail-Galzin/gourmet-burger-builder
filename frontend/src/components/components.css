@@ -249,3 +249,18 @@
     1px 1px 0 #000;
   color: white;
 }
+
+.btn-order-new{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  background-color: white;
+  color: #000;
+  transition: background 0.2s ease;
+}

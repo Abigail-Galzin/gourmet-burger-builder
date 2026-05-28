@@ -11,7 +11,6 @@
   margin-bottom: 20px;
 }
 
-/* Distribución en 3 columnas iguales */
 .app-burger {
   display: flex;
   flex: 1;
@@ -26,15 +25,13 @@
   flex-direction: column;
 }
 
-/* Contenedor del botón centrado */
 .order-actions {
   display: flex;
-  justify-content: center;
   align-items: center;
   padding: 12px 0;
+  justify-content: space-between;
 }
 
-/* Estilo del botón grande */
 .btn-order {
   display: flex;
   flex-direction: column;

@@ -14,7 +14,7 @@ export const orderService = {
     const fullLayers = [burgerBase, ...burgerIngredients];
 
     const orderInput: OrderInput = {
-      total_price: totalPrice,
+      total_price: +totalPrice.toFixed(2),
       total_calories: totalCalories,
       status: 'PENDING'
     };
@@ -47,5 +47,22 @@ export const orderService = {
     }
 
     return { success: true, orderId };
+  },
+
+  async updateBurgerStatus(orderId: string) {
+    try {
+        const { error } = await supabase
+            .from('orders')
+            .update({ status: 'COMPLETED' })
+            .eq('id', orderId);
+
+        if (error) {
+            console.error('Error updating database:', error.message);
+        } else {
+            console.log(`📦 Orden #${orderId} updated to COMPLETED.`);
+        }
+    } catch (err) {
+        console.error('Unexpected Error:', err);
+    }
   }
 };

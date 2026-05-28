@@ -44,7 +44,7 @@ export default function IngredientMenu({ }) {
                   key={ingredient.id}
                   className={`menu-button ${isBaseSelected ? 'selected' : ''}`}
                   onClick={() => addIngredient(ingredient)}
-                  disabled={isOrdering}
+                  disabled={!isOrdering}
                 >
                   <span className="ingredient-btn-name">{ingredient.name}</span>
                   <span className="ingredient-btn-price">+${ingredient.price}</span>
@@ -77,7 +77,7 @@ export default function IngredientMenu({ }) {
                   key={ingredient.id}
                   className={`menu-button ${isIngredientSelected ? 'selected' : ''}`}
                   onClick={() => addIngredient(ingredient)}
-                  disabled={isOrdering}
+                  disabled={!isOrdering}
                 >
                   <span className='ingredient-btn-name'>{ingredient.name}</span>
                   <span className='ingredient-btn-price'>+${ingredient.price}</span>

@@ -12,7 +12,7 @@ export function BurgerProvider({ children }) {
   const totalCalories = burgerIngredients.reduce(
     (sum: number, ing: Ingredients) => sum + ing.calories, baseCalories
   );
-  const [isOrdering, setIsOrdering] = useState<boolean>(false);
+  const [isOrdering, setIsOrdering] = useState<boolean>(true);
 
   const addIngredient = (ingredient: Ingredients) => {
     if (ingredient.type.includes('base')) {
@@ -39,24 +39,22 @@ export function BurgerProvider({ children }) {
 
   const saveBurger = async () => {
     try {
-      setIsOrdering(false);
-      await orderService.createBurgerOrder(
+      const order = await orderService.createBurgerOrder(
         totalPrice,
         totalCalories,
         burgerBase,
         burgerIngredients
       );
 
-      alert('✅ Burger order stored with layers!');
-
       setIsOrdering(false);
-      setBurgerIngredients([]);
-      setBurgerBase(null);
 
+      setTimeout(async () => {
+        await orderService.updateBurgerStatus(order.orderId)
+        setBurgerIngredients([]);
+        setBurgerBase(null);
+      }, 8000);
     } catch (error: any) {
       alert(`⚠️ Error: ${error.message}`);
-    } finally {
-      setIsOrdering(false);
     }
   }
 
@@ -70,7 +68,8 @@ export function BurgerProvider({ children }) {
     totalPrice,
     totalCalories,
     totalIngredients: burgerBase ? [burgerBase, ...burgerIngredients] : [...burgerIngredients],
-    isOrdering
+    isOrdering,
+    setIsOrdering
   };
 
   return (

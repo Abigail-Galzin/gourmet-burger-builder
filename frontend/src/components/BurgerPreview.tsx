@@ -3,7 +3,7 @@ import { useBurgerBuilder } from '../context/BurgerContext';
 import './components.css';
 
 export default function BurgerPreview({ }) {
-    const { removeIngredient, burgerBase, burgerIngredients } = useBurgerBuilder();
+    const { removeIngredient, burgerBase, burgerIngredients, isOrdering } = useBurgerBuilder();
     const ingredientsPreview: Ingredients[] = burgerBase
         ? [burgerBase, ...burgerIngredients, burgerBase]
         : [...burgerIngredients];
@@ -22,6 +22,7 @@ export default function BurgerPreview({ }) {
                         <button
                             className="remove-ingredient"
                             onClick={() => removeIngredient(index, ingredientsPreview.length - 1)}
+                            disabled={!isOrdering}
                         >
                             <span>X</span>
                         </button>
