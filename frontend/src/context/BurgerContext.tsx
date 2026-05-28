@@ -16,8 +16,14 @@ export function BurgerProvider({ children }) {
     }
   };
 
-  const removeIngredient = (indexToRemove: number) => {
-    setBurgerIngredients(burgerIngredients.filter((_, index) => index !== indexToRemove));
+  const removeIngredient = (indexToRemove: number, finalIndex: number) => {
+    const first = indexToRemove === 0;
+    if ((first || indexToRemove === finalIndex) && burgerBase != null) {
+      setBurgerBase(null);
+    } else {
+      const remove = first ? indexToRemove : indexToRemove - 1;
+      setBurgerIngredients(burgerIngredients.filter((_, index) => index !== remove));
+    }
   };
 
   const resetBurger = () => {

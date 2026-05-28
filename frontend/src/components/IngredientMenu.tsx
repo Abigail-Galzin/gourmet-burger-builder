@@ -38,18 +38,19 @@ export default function IngredientMenu({ }) {
         <div className='menu'>
           <div className='menu-grid'>
             {baseIngredients.map((ingredient) => {
-            const isBaseSelected = burgerBase?.id === ingredient.id;
-            return (
-              <button
-                key={ingredient.id}
-                className={`menu-button ${isBaseSelected ? 'selected' : ''}`}
-                onClick={() => addIngredient(ingredient)}
-                disabled={isOrdering}
-              >
-                <span className="ingredient-btn-name">{ingredient.name}</span>
-                <span className="ingredient-btn-price">+${ingredient.price}</span>
-              </button>
-            )})}
+              const isBaseSelected = burgerBase?.id === ingredient.id;
+              return (
+                <button
+                  key={ingredient.id}
+                  className={`menu-button ${isBaseSelected ? 'selected' : ''}`}
+                  onClick={() => addIngredient(ingredient)}
+                  disabled={isOrdering}
+                >
+                  <span className="ingredient-btn-name">{ingredient.name}</span>
+                  <span className="ingredient-btn-price">+${ingredient.price}</span>
+                </button>
+              )
+            })}
           </div>
         </div>
       </div>
@@ -69,19 +70,20 @@ export default function IngredientMenu({ }) {
         <div className='menu'>
           <div className='menu-grid'>
             {normalIngredients.map((ingredient) => {
-            const isIngredientSelected =
-              burgerIngredients.some(burgerIngredient => burgerIngredient.id === ingredient.id);
-            return (
-              <button
-                key={ingredient.id}
-                className={`menu-button ${isIngredientSelected ? 'selected' : ''}`}
-                onClick={() => addIngredient(ingredient)}
-                disabled={isOrdering}
-              >
-                <span className='ingredient-btn-name'>{ingredient.name}</span>
-                <span className='ingredient-btn-price'>+${ingredient.price}</span>
-              </button>
-            )})}
+              const isIngredientSelected =
+                burgerIngredients.some(burgerIngredient => burgerIngredient.id === ingredient.id);
+              return (
+                <button
+                  key={ingredient.id}
+                  className={`menu-button ${isIngredientSelected ? 'selected' : ''}`}
+                  onClick={() => addIngredient(ingredient)}
+                  disabled={isOrdering}
+                >
+                  <span className='ingredient-btn-name'>{ingredient.name}</span>
+                  <span className='ingredient-btn-price'>+${ingredient.price}</span>
+                </button>
+              )
+            })}
           </div>
         </div>
       </div>
