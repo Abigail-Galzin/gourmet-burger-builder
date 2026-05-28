@@ -18,7 +18,7 @@ export default function BurgerPreview({ }) {
                         key={index + ingredient.name}
                         style={{ backgroundColor: ingredient.color }}
                     >
-                        <span className="text-badge">{ingredient.name + index}</span>
+                        <span className="text-badge">{ingredient.name}</span>
                         <button
                             className="remove-ingredient"
                             onClick={() => removeIngredient(index, ingredientsPreview.length - 1)}

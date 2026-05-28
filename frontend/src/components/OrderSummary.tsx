@@ -3,7 +3,7 @@ import type { Ingredients } from '../Types';
 import './components.css';
 
 export default function OrderSummary({ }) {
-    const { totalIngredients, totalCalories, totalPrice} = useBurgerBuilder();
+    const { totalIngredients, totalPrice, totalCalories} = useBurgerBuilder();
 
     const getChefBadge = (ingredients: Ingredients[], totalCalories: number) => {
         const hasMeat = ingredients.some((ing) => ing.type === 'meat');

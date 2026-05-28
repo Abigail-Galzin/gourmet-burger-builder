@@ -2,20 +2,21 @@ import { useState, useEffect } from 'react';
 import './components.css';
 import { supabase } from '../supabaseClient';
 import { useBurgerBuilder } from '../context/BurgerContext';
+import type { Ingredients } from '../Types';
 
 export default function IngredientMenu({ }) {
-  const [baseIngredients, setBaseIngredients] = useState([]);
-  const [normalIngredients, setNormalIngredients] = useState([]);
-  const [isBaseOpen, setIsBaseOpen] = useState(true);
-  const [isIngredientsOpen, setIsIngredientsOpen] = useState(false);
+  const [baseIngredients, setBaseIngredients] = useState<Ingredients[]>([]);
+  const [normalIngredients, setNormalIngredients] = useState<Ingredients[]>([]);
+  const [isBaseOpen, setIsBaseOpen] = useState<boolean>(true);
+  const [isIngredientsOpen, setIsIngredientsOpen] = useState<boolean>(false);
   const { isOrdering, addIngredient, burgerBase, burgerIngredients } = useBurgerBuilder();
 
   useEffect(() => {
     async function obtenerDatos() {
       const { data, error } = await supabase.from('ingredients').select('*');
       if (!error) {
-        setBaseIngredients(data.filter((ingredient) => ingredient.type.includes('base')));
-        setNormalIngredients(data.filter((ingredient) => !ingredient.type.includes('base')));
+        setBaseIngredients(data.filter((ingredient: Ingredients) => ingredient.type.includes('base')));
+        setNormalIngredients(data.filter((ingredient: Ingredients) => !ingredient.type.includes('base')));
       }
     }
     obtenerDatos();

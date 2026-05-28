@@ -1,10 +1,11 @@
 import { useState, useContext, createContext } from 'react';
 import { orderService } from '../service/OrderService';
-import type { Ingredients } from '../Types';
+import type { Ingredients, BurgerContextType } from '../Types';
+import type { ReactNode } from 'react';
 
-const BurgerContext = createContext(null);
+const BurgerContext = createContext<BurgerContextType | undefined>(undefined);
 
-export function BurgerProvider({ children }) {
+export function BurgerProvider({ children } : {children : ReactNode}) {
   const [burgerIngredients, setBurgerIngredients] = useState<Ingredients[]>([]);
   const [burgerBase, setBurgerBase] = useState<Ingredients | null>(null);
   const [basePrice, baseCalories] = burgerBase ? [burgerBase.price, burgerBase.calories] : [0, 0];
@@ -74,7 +75,7 @@ export function BurgerProvider({ children }) {
 
   return (
     <BurgerContext.Provider value={value}>
-      {children} { }
+      {children}
     </BurgerContext.Provider>
   );
 }

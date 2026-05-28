@@ -27,3 +27,17 @@ export interface OrderIngredientInput {
     ingredient_id: string;
     layer_position: number;
 }
+
+export interface BurgerContextType {
+    burgerIngredients: Ingredients[];
+    burgerBase: Ingredients | null;
+    addIngredient: (ingredient: Ingredients) => void;
+    removeIngredient: (indexToRemove: number, finalIndex: number) => void;
+    setIsOrdering: (ordering: boolean) => void;
+    isOrdering: boolean;
+    saveBurger: () => void;
+    resetBurger: () => void;
+    totalIngredients: Ingredients[];
+    totalCalories: number;
+    totalPrice: number;
+}
